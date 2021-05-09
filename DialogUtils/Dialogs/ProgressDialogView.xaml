@@ -7,6 +7,13 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Default.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid
         MinWidth="40"
         MinHeight="40"
@@ -28,7 +35,7 @@
             Command="{Binding CancelCommand}"
             Content="取消"
             IsCancel="True"
-            Style="{StaticResource MaterialDesignFlatButton}"
+            Style="{DynamicResource MaterialDesignFlatButton}"
             Visibility="{Binding Cancellable, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
