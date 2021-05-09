@@ -18,6 +18,10 @@ namespace DialogUtils
         public DialogHostService(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
+            Configure<MessageDialogViewModel, MessageDialogView>();
+            Configure<InputDialogViewModel, InputDialogView>();
+            Configure<ProgressDialogViewModel, ProgressDialogView>();
         }
 
         private Type GetViewType(string key)
