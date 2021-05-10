@@ -67,6 +67,7 @@ namespace DialogUtils
         }
 
         public async Task ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
+            where VM : class
         {
             if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
@@ -88,7 +89,8 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = _serviceProvider.GetService<VM>();
+                    var content = e.Session.Content as UserControl;
+                    var viewModel = content.DataContext as VM;
 
                     if (init != null)
                     {
@@ -127,7 +129,8 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = _serviceProvider.GetService<MessageDialogViewModel>();
+                    var content = e.Session.Content as UserControl;
+                    var viewModel = content.DataContext as MessageDialogViewModel;
                     viewModel.Init(message, header, isCancelButtonVisible);
                 });
 
@@ -151,7 +154,8 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = _serviceProvider.GetService<InputDialogViewModel>();
+                    var content = e.Session.Content as UserControl;
+                    var viewModel = content.DataContext as InputDialogViewModel;
                     viewModel.Init(message, input, header);
                 });
 
@@ -175,7 +179,8 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = _serviceProvider.GetService<ProgressDialogViewModel>();
+                    var content = e.Session.Content as UserControl;
+                    var viewModel = content.DataContext as ProgressDialogViewModel;
                     viewModel.Init(dialogIdentifier, isIndeterminate, cancellable);
                 });
 

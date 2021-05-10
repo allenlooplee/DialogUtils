@@ -10,7 +10,8 @@ namespace DialogUtils
             where VM : class
             where V : UserControl;
 
-        Task ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null);
+        Task ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
+            where VM : class;
         void CloseDialog(string dialogIdentifier);
 
         Task<bool> ShowMessageAsync(string dialogIdentifier, string message, string header = null, bool isCancelButtonVisible = false);

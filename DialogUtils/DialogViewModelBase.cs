@@ -24,7 +24,7 @@ namespace DialogUtils
         }
         protected virtual void SubmitImpl()
         {
-            
+
         }
 
         public DialogViewModelBase(IDialogHostService dialogHostService)
@@ -34,7 +34,7 @@ namespace DialogUtils
 
         public virtual void Init()
         {
-            
+
         }
 
         public void CloseDialog()
