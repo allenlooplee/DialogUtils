@@ -7,24 +7,26 @@ namespace DialogUtils.Converters
 {
     public class NullToVisibilityConverter : IValueConverter
     {
+        private readonly Visibility _nullValue;
+        private readonly Visibility _notNullValue;
+
+        public static NullToVisibilityConverter NullToCollapsedConverter { get; } = new NullToVisibilityConverter(Visibility.Collapsed, Visibility.Visible);
+        public static NullToVisibilityConverter NullToVisibleConverter { get; } = new NullToVisibilityConverter(Visibility.Visible, Visibility.Collapsed);
+
+        public NullToVisibilityConverter(Visibility nullValue, Visibility notNullValue)
+        {
+            _nullValue = nullValue;
+            _notNullValue = notNullValue;
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var flag = value == null;
-            var inverse = (parameter as string) == "inverse";
-
-            if (inverse)
-            {
-                return (flag ? Visibility.Collapsed : Visibility.Visible);
-            }
-            else
-            {
-                return (flag ? Visibility.Visible : Visibility.Collapsed);
-            }
+            return value == null ? _nullValue : _notNullValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return Binding.DoNothing;
         }
     }
 }

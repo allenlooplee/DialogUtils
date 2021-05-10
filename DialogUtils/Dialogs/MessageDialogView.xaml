@@ -2,6 +2,7 @@
     x:Class="DialogUtils.Dialogs.MessageDialogView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:DialogUtils.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -27,7 +28,7 @@
             Margin="{DynamicResource SmallBottomMargin}"
             FontSize="{DynamicResource DialogHostHeaderFontSize}"
             Text="{Binding Header}"
-            Visibility="{Binding Header, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter='inverse'}" />
+            Visibility="{Binding Header, Converter={x:Static converters:NullToVisibilityConverter.NullToCollapsedConverter}}" />
         <TextBlock
             Grid.Row="1"
             Text="{Binding Message}"
@@ -41,7 +42,7 @@
                 Content="取消"
                 DockPanel.Dock="Right"
                 Style="{DynamicResource MaterialDesignFlatButton}"
-                Visibility="{Binding IsCancelButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding IsCancelButtonVisible, Converter={x:Static converters:BooleanToVisibilityConverter.TrueToVisibleConverter}}">
                 <Button.CommandParameter>
                     <sys:Boolean>false</sys:Boolean>
                 </Button.CommandParameter>

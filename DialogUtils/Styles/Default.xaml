@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:converters="clr-namespace:DialogUtils.Converters">
-    
+    xmlns:converters="clr-namespace:DialogUtils.Converters"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
@@ -14,7 +14,4 @@
     <Thickness x:Key="SmallBottomMargin">0, 0, 0, 12</Thickness>
     <Thickness x:Key="MediumTopMargin">0,24,0,0</Thickness>
 
-    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
-    
 </ResourceDictionary>

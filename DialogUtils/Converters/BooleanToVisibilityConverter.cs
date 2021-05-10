@@ -7,34 +7,33 @@ namespace DialogUtils.Converters
 {
     class BooleanToVisibilityConverter : IValueConverter
     {
+        private readonly Visibility _trueValue;
+        private readonly Visibility _falseValue;
+
+        public static BooleanToVisibilityConverter TrueToVisibleConverter { get; } = new BooleanToVisibilityConverter(Visibility.Visible, Visibility.Collapsed);
+        public static BooleanToVisibilityConverter TrueToCollapsedConverter { get; } = new BooleanToVisibilityConverter(Visibility.Collapsed, Visibility.Visible);
+
+        public BooleanToVisibilityConverter(Visibility trueValue, Visibility falseValue)
+        {
+            _trueValue = trueValue;
+            _falseValue = falseValue;
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool flag = false;
-            if (value is bool)
+            if (value is bool boolean)
             {
-                flag = (bool)value;
-            }
-            else if (value is bool?)
-            {
-                bool? nullable = (bool?)value;
-                flag = nullable.HasValue ? nullable.Value : false;
-            }
-
-            bool inverse = (parameter as string) == "inverse";
-
-            if (inverse)
-            {
-                return (flag ? Visibility.Collapsed : Visibility.Visible);
+                return boolean ? _trueValue : _falseValue;
             }
             else
             {
-                return (flag ? Visibility.Visible : Visibility.Collapsed);
+                return _falseValue;
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return Binding.DoNothing;
         }
     }
 }
