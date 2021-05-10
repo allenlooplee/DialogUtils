@@ -7,7 +7,7 @@ namespace DialogUtils
 {
     public static class DialogHostServiceExtensions
     {
-        public static IServiceCollection AddDialogHostService(this IServiceCollection services, Func<IServiceProvider, IDialogHostService> factory)
+        public static IServiceCollection AddDialogHostService(this IServiceCollection services, Func<IServiceProvider, IDialogHostService> factory = null)
         {
             services.AddTransient<MessageDialogViewModel>();
             services.AddTransient<MessageDialogView>();

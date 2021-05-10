@@ -7,12 +7,12 @@
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mdx="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
     Title="MainWindow"
-    WindowStartupLocation="CenterScreen"
     Width="640"
     Height="480"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <md:DialogHost DialogTheme="Light" Identifier="dialogHost">
+        <md:DialogHost DialogTheme="Light" Identifier="MainHost">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -20,7 +20,6 @@
                 </Grid.RowDefinitions>
                 <mdx:AppBar
                     Title="DialogUtils Demo"
-                    Grid.ColumnSpan="2"
                     Panel.ZIndex="1024"
                     ShowNavigationDrawerButton="True">
                     <StackPanel
@@ -50,6 +49,14 @@
                         </Button>
                     </StackPanel>
                 </mdx:AppBar>
+                <Grid Grid.Row="1">
+                    <Button
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Show Message"
+                        Command="{Binding ShowMessageCommand}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" />
+                </Grid>
             </Grid>
         </md:DialogHost>
     </Grid>

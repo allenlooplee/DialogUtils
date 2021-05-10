@@ -11,4 +11,8 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DialogUtils\DialogUtils.csproj" />
+  </ItemGroup>
+
 </Project>

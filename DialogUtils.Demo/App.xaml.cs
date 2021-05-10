@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
+using DialogUtils;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 
 namespace DialogUtils.Demo
 {
@@ -13,5 +11,19 @@ namespace DialogUtils.Demo
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Ioc.Default.ConfigureServices(ConfigureServices());
+        }
+
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddDialogHostService();
+            services.AddTransient<MainViewModel>();
+
+            return services.BuildServiceProvider();
+        }
     }
 }
