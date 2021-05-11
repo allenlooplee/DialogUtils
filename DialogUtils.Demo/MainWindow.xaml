@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mdx="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+    xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
     Title="MainWindow"
     Width="640"
     Height="480"
@@ -48,45 +49,64 @@
                     </StackPanel>
                 </mdx:AppBar>
                 <TabControl Grid.Row="1" Style="{StaticResource MaterialDesignTabControl}">
+                    <bh:Interaction.Triggers>
+                        <bh:EventTrigger EventName="SelectionChanged">
+                            <bh:InvokeCommandAction Command="{Binding ClearCommand}"/>
+                        </bh:EventTrigger>
+                    </bh:Interaction.Triggers>
                     <TabItem Header="Message">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Header (optional)"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                Text="{Binding Header}" />
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Message (required)"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
                             <Button
                                 Margin="0,0,0,16"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
                                 Command="{Binding ShowMessageCommand}"
                                 Content="Show Message"
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
+                            <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Input">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Header (optional)"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                Text="{Binding Header}" />
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Message (required)"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
                             <Button
                                 Margin="0,0,0,16"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
                                 Command="{Binding ShowInputCommand}"
                                 Content="Show Input"
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
+                            <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Progress">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
                             <Button
                                 Margin="0,0,0,16"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
                                 Command="{Binding ShowProgressCommand}"
                                 Content="Show Progress"
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Custom">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
                             <Button
                                 Margin="0,0,0,16"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
                                 Command="{Binding ShowCustomCommand}"
                                 Content="Show Custom"
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
