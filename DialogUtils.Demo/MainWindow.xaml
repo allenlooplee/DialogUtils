@@ -10,6 +10,7 @@
     Width="640"
     Height="480"
     WindowStartupLocation="CenterScreen"
+    TextElement.FontFamily="Microsoft YaHei"
     mc:Ignorable="d">
     <Grid>
         <md:DialogHost DialogTheme="Light" Identifier="MainHost">
