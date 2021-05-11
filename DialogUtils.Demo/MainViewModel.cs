@@ -29,6 +29,13 @@ namespace DialogUtils.Demo
             _dialogHostService.ShowProgressAsync("MainHost", true, true);
         }
 
+        private ICommand _showCustomCommand;
+        public ICommand ShowCustomCommand => _showCustomCommand ?? (_showCustomCommand = new RelayCommand(ShowCustomImpl));
+        private void ShowCustomImpl()
+        {
+
+        }
+
         public MainViewModel(IDialogHostService dialogHostService)
         {
             _dialogHostService = dialogHostService;
