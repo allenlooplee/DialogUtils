@@ -17,8 +17,8 @@ namespace DialogUtils.Dialogs
             set => SetProperty(ref _isIndeterminate, value);
         }
 
-        private int _value;
-        public int Value
+        private double _value;
+        public double Value
         {
             get => _value;
             set => SetProperty(ref _value, value);

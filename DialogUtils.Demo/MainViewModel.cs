@@ -103,10 +103,10 @@ namespace DialogUtils.Demo
             vm.Cancelled += (o, e) => Result = "Cancelled";
 
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Interval = TimeSpan.FromMilliseconds(10);
             _timer.Tick += (o, e) =>
             {
-                vm.Value += 5;
+                vm.Value += .5;
 
                 if (vm.Value >= 100)
                 {
