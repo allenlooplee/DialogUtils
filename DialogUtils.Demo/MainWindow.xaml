@@ -19,10 +19,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <mdx:AppBar
-                    Title="DialogUtils Demo"
-                    Panel.ZIndex="1024"
-                    ShowNavigationDrawerButton="True">
+                <mdx:AppBar Title="DialogUtils Demo" ShowNavigationDrawerButton="True">
                     <StackPanel
                         Margin="0,0,4,0"
                         HorizontalAlignment="Right"
@@ -50,31 +47,41 @@
                         </Button>
                     </StackPanel>
                 </mdx:AppBar>
-                <StackPanel
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Button
-                        Margin="0,0,0,16"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Command="{Binding ShowMessageCommand}"
-                        Content="Show Message"
-                        Style="{StaticResource MaterialDesignRaisedButton}" />
-                    <Button
-                        Margin="0,0,0,16"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Command="{Binding ShowInputCommand}"
-                        Content="Show Input"
-                        Style="{StaticResource MaterialDesignRaisedButton}" />
-                    <Button
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Command="{Binding ShowProgressCommand}"
-                        Content="Show Progress"
-                        Style="{StaticResource MaterialDesignRaisedButton}" />
-                </StackPanel>
+                <TabControl Grid.Row="1" Style="{StaticResource MaterialDesignTabControl}">
+                    <TabItem Header="Message">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button
+                                Margin="0,0,0,16"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Command="{Binding ShowMessageCommand}"
+                                Content="Show Message"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Input">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button
+                                Margin="0,0,0,16"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Command="{Binding ShowInputCommand}"
+                                Content="Show Input"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Progress">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button
+                                Margin="0,0,0,16"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Command="{Binding ShowProgressCommand}"
+                                Content="Show Progress"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
             </Grid>
         </md:DialogHost>
     </Grid>
