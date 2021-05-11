@@ -1,7 +1,10 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using DialogUtils.Dialogs;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace DialogUtils.Demo
 {
@@ -9,6 +12,7 @@ namespace DialogUtils.Demo
     {
         private const string DialogHostIdentifier = "MainHost";
         private IDialogHostService _dialogHostService;
+        private DispatcherTimer _timer;
 
         private string _header;
         public string Header
@@ -53,11 +57,26 @@ namespace DialogUtils.Demo
             Result = await _dialogHostService.ShowInputAsync(DialogHostIdentifier, Message, null, Header);
         }
 
+        private bool _cancellable;
+        public bool Cancellable
+        {
+            get => _cancellable;
+            set => SetProperty(ref _cancellable, value);
+        }
+
         private ICommand _showProgressCommand;
         public ICommand ShowProgressCommand => _showProgressCommand ?? (_showProgressCommand = new RelayCommand(ShowProgressImpl));
         private void ShowProgressImpl()
         {
-            _dialogHostService.ShowProgressAsync(DialogHostIdentifier, true, true);
+            _dialogHostService.ShowProgressAsync(
+                DialogHostIdentifier,
+                isIndeterminate: Cancellable,
+                cancellable: Cancellable);
+
+            if (!Cancellable)
+            {
+                _timer.Start();
+            }
         }
 
         private ICommand _showCustomCommand;
@@ -79,6 +98,22 @@ namespace DialogUtils.Demo
         public MainViewModel(IDialogHostService dialogHostService)
         {
             _dialogHostService = dialogHostService;
+
+            var vm = Ioc.Default.GetService<ProgressDialogViewModel>();
+            vm.Cancelled += (o, e) => Result = "Cancelled";
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += (o, e) =>
+            {
+                vm.Value += 5;
+
+                if (vm.Value >= 100)
+                {
+                    _timer.Stop();
+                    _dialogHostService.CloseDialog(DialogHostIdentifier);
+                }
+            };
         }
     }
 }

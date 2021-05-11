@@ -2,11 +2,11 @@
     x:Class="DialogUtils.Demo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mdx="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-    xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
     Title="MainWindow"
     Width="640"
     Height="480"
@@ -51,11 +51,14 @@
                 <TabControl Grid.Row="1" Style="{StaticResource MaterialDesignTabControl}">
                     <bh:Interaction.Triggers>
                         <bh:EventTrigger EventName="SelectionChanged">
-                            <bh:InvokeCommandAction Command="{Binding ClearCommand}"/>
+                            <bh:InvokeCommandAction Command="{Binding ClearCommand}" />
                         </bh:EventTrigger>
                     </bh:Interaction.Triggers>
                     <TabItem Header="Message">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                        <StackPanel
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                             <TextBox
                                 Margin="0,0,0,16"
                                 md:HintAssist.Hint="Header (optional)"
@@ -75,7 +78,10 @@
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Input">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                        <StackPanel
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                             <TextBox
                                 Margin="0,0,0,16"
                                 md:HintAssist.Hint="Header (optional)"
@@ -95,16 +101,27 @@
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Progress">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                        <StackPanel
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+                                <ToggleButton IsChecked="{Binding Cancellable}" Style="{StaticResource MaterialDesignSwitchToggleButton}" />
+                                <TextBlock Margin="8,0,0,0" Text="Show cancel button" />
+                            </StackPanel>
                             <Button
                                 Margin="0,0,0,16"
                                 Command="{Binding ShowProgressCommand}"
                                 Content="Show Progress"
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
+                            <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Custom">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+                        <StackPanel
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                             <Button
                                 Margin="0,0,0,16"
                                 Command="{Binding ShowCustomCommand}"
