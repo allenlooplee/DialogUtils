@@ -36,6 +36,8 @@
             Width="80"
             Command="{Binding CancelCommand}"
             Content="取消"
+            FontSize="14"
+            FontWeight="SemiBold"
             IsCancel="True"
             Style="{DynamicResource MaterialDesignFlatButton}"
             Visibility="{Binding Cancellable, Converter={x:Static converters:BooleanToVisibilityConverter.TrueToVisibleConverter}}" />
