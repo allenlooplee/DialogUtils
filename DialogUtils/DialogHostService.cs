@@ -89,8 +89,7 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var content = e.Session.Content as UserControl;
-                    var viewModel = content.DataContext as VM;
+                    var viewModel = view.DataContext as VM;
 
                     if (init != null)
                     {
@@ -129,8 +128,7 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var content = e.Session.Content as UserControl;
-                    var viewModel = content.DataContext as MessageDialogViewModel;
+                    var viewModel = view.DataContext as MessageDialogViewModel;
                     viewModel.Init(message, header, isCancelButtonVisible);
                 });
 
@@ -154,8 +152,7 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var content = e.Session.Content as UserControl;
-                    var viewModel = content.DataContext as InputDialogViewModel;
+                    var viewModel = view.DataContext as InputDialogViewModel;
                     viewModel.Init(message, input, header);
                 });
 
@@ -179,8 +176,7 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var content = e.Session.Content as UserControl;
-                    var viewModel = content.DataContext as ProgressDialogViewModel;
+                    var viewModel = view.DataContext as ProgressDialogViewModel;
                     viewModel.Init(dialogIdentifier, isIndeterminate, cancellable);
                 });
 
