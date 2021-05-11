@@ -81,6 +81,16 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}" />
                         </StackPanel>
                     </TabItem>
+                    <TabItem Header="Custom">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button
+                                Margin="0,0,0,16"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Content="Show Custom"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                        </StackPanel>
+                    </TabItem>
                 </TabControl>
             </Grid>
         </md:DialogHost>
