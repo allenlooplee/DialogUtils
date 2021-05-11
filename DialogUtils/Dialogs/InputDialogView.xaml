@@ -12,11 +12,11 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/Default.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Width="240" Margin="16">
+    <Grid Width="280">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -25,31 +25,40 @@
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Margin="{DynamicResource SmallBottomMargin}"
-            FontSize="{DynamicResource DialogHostHeaderFontSize}"
+            Margin="24,24,24,0"
+            FontSize="20"
+            FontWeight="Bold"
             Text="{Binding Header}"
             Visibility="{Binding Header, Converter={x:Static converters:NullToVisibilityConverter.NullToCollapsedConverter}}" />
         <TextBlock
             Grid.Row="1"
-            Margin="{DynamicResource SmallBottomMargin}"
+            Margin="24,24,24,0"
+            FontSize="16"
+            FontWeight="Regular"
             Text="{Binding Message}"
             TextWrapping="Wrap" />
-        <TextBox Grid.Row="2" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Margin="24,24,24,0" Grid.Row="2" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
         <DockPanel
             Grid.Row="3"
-            Margin="{DynamicResource MediumTopMargin}"
+            Margin="24,28,0,0"
             LastChildFill="False">
             <Button
+                Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
                 CommandParameter="{x:Null}"
                 Content="取消"
                 DockPanel.Dock="Right"
+                FontSize="14"
+                FontWeight="SemiBold"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
+                Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
                 CommandParameter="{Binding Input}"
                 Content="确定"
                 DockPanel.Dock="Right"
+                FontSize="14"
+                FontWeight="SemiBold"
                 IsEnabled="{Binding HasInput}"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
         </DockPanel>

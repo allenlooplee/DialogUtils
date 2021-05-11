@@ -49,14 +49,31 @@
                         </Button>
                     </StackPanel>
                 </mdx:AppBar>
-                <Grid Grid.Row="1">
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
                     <Button
-                        HorizontalAlignment="Center"
+                        Margin="0,0,0,16"
+                        HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Content="Show Message"
                         Command="{Binding ShowMessageCommand}"
+                        Content="Show Message"
                         Style="{StaticResource MaterialDesignRaisedButton}" />
-                </Grid>
+                    <Button
+                        Margin="0,0,0,16"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Command="{Binding ShowInputCommand}"
+                        Content="Show Input"
+                        Style="{StaticResource MaterialDesignRaisedButton}" />
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Command="{Binding ShowProgressCommand}"
+                        Content="Show Progress"
+                        Style="{StaticResource MaterialDesignRaisedButton}" />
+                </StackPanel>
             </Grid>
         </md:DialogHost>
     </Grid>
