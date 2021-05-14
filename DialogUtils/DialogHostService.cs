@@ -84,13 +84,13 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = typeof(VM);
 
             var view = GetView(typeof(VM).FullName);
+            var viewModel = view.DataContext as VM;
+
             await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = view.DataContext as VM;
-
                     if (init != null)
                     {
                         if (viewModel is DialogViewModelBase dialogViewModel)
@@ -129,14 +129,12 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = typeof(MessageDialogView);
 
             var view = _serviceProvider.GetService<MessageDialogView>();
+            var viewModel = view.DataContext as MessageDialogViewModel;
+
             var result = await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) =>
-                {
-                    var viewModel = view.DataContext as MessageDialogViewModel;
-                    viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText);
-                });
+                openedEventHandler: (o, e) => viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -159,14 +157,12 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = typeof(InputDialogView);
 
             var view = _serviceProvider.GetService<InputDialogView>();
+            var viewModel = view.DataContext as InputDialogViewModel;
+
             var result = await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) =>
-                {
-                    var viewModel = view.DataContext as InputDialogViewModel;
-                    viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText);
-                });
+                openedEventHandler: (o, e) => viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -196,10 +192,7 @@ namespace DialogUtils
             DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) =>
-                {
-                    viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText);
-                },
+                openedEventHandler: (o, e) => viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText),
                 closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null);
 
             return viewModel;
