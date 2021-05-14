@@ -198,7 +198,7 @@ namespace DialogUtils
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    viewModel.Init(dialogIdentifier, isIndeterminate, cancellable);
+                    viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText);
                 },
                 closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null);
 
