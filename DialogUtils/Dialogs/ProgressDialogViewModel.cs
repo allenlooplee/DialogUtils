@@ -66,5 +66,10 @@ namespace DialogUtils.Dialogs
             Cancellable = cancellable;
             CancelButtonText = cancelButtonText;
         }
+
+        public void Close()
+        {
+            _dialogHostService.CloseDialog(_dialogIdentifier);
+        }
     }
 }

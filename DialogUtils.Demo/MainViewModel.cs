@@ -86,7 +86,7 @@ namespace DialogUtils.Demo
                     await Task.Delay(10);
                 }
 
-                _dialogHostService.CloseDialog(DialogHostIdentifier);
+                vm.Close();
             }
         }
 
