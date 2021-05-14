@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DialogUtils.Dialogs;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -30,7 +31,7 @@ namespace DialogUtils
             string affirmativeButtonText = "OK",
             string negativeButtonText = "Cancel");
 
-        void ShowProgressAsync(
+        ProgressDialogViewModel ShowProgressAsync(
             string dialogIdentifier,
             bool isIndeterminate = true,
             bool cancellable = false,

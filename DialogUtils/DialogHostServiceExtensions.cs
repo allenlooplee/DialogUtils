@@ -9,14 +9,14 @@ namespace DialogUtils
     {
         public static IServiceCollection AddDialogHostService(this IServiceCollection services, Func<IServiceProvider, IDialogHostService> factory = null)
         {
-            services.AddSingleton<MessageDialogViewModel>();
-            services.AddSingleton<MessageDialogView>();
+            services.AddTransient<MessageDialogViewModel>();
+            services.AddTransient<MessageDialogView>();
 
-            services.AddSingleton<ProgressDialogViewModel>();
-            services.AddSingleton<ProgressDialogView>();
+            services.AddTransient<ProgressDialogViewModel>();
+            services.AddTransient<ProgressDialogView>();
 
-            services.AddSingleton<InputDialogViewModel>();
-            services.AddSingleton<InputDialogView>();
+            services.AddTransient<InputDialogViewModel>();
+            services.AddTransient<InputDialogView>();
 
             if (factory is null)
             {

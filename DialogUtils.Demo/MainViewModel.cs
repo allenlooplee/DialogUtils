@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -12,7 +13,6 @@ namespace DialogUtils.Demo
     {
         private const string DialogHostIdentifier = "MainHost";
         private IDialogHostService _dialogHostService;
-        private DispatcherTimer _timer;
 
         private string _header;
         public string Header
@@ -66,17 +66,35 @@ namespace DialogUtils.Demo
 
         private ICommand _showProgressCommand;
         public ICommand ShowProgressCommand => _showProgressCommand ?? (_showProgressCommand = new RelayCommand(ShowProgressImpl));
-        private void ShowProgressImpl()
+        private async void ShowProgressImpl()
         {
-            _dialogHostService.ShowProgressAsync(
+            var vm = _dialogHostService.ShowProgressAsync(
                 DialogHostIdentifier,
                 isIndeterminate: Cancellable,
                 cancellable: Cancellable);
 
-            if (!Cancellable)
+            if (Cancellable)
             {
-                _timer.Start();
+                vm.Cancelled += OnCancelled;
             }
+            else
+            {
+                for (double d = 0; d < 100; d += .5)
+                {
+                    vm.Value = d;
+
+                    await Task.Delay(10);
+                }
+
+                _dialogHostService.CloseDialog(DialogHostIdentifier);
+            }
+        }
+
+        private void OnCancelled(object sender, EventArgs e)
+        {
+            Result = "Cancelled";
+
+            ((ProgressDialogViewModel)sender).Cancelled -= OnCancelled;
         }
 
         private ICommand _showCustomCommand;
@@ -98,22 +116,6 @@ namespace DialogUtils.Demo
         public MainViewModel(IDialogHostService dialogHostService)
         {
             _dialogHostService = dialogHostService;
-
-            var vm = Ioc.Default.GetService<ProgressDialogViewModel>();
-            vm.Cancelled += (o, e) => Result = "Cancelled";
-
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(10);
-            _timer.Tick += (o, e) =>
-            {
-                vm.Value += .5;
-
-                if (vm.Value >= 100)
-                {
-                    _timer.Stop();
-                    _dialogHostService.CloseDialog(DialogHostIdentifier);
-                }
-            };
         }
     }
 }

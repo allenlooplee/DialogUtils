@@ -173,30 +173,36 @@ namespace DialogUtils
             return (result as string);
         }
 
-        public async void ShowProgressAsync(
+        public ProgressDialogViewModel ShowProgressAsync(
             string dialogIdentifier,
             bool isIndeterminate = true,
             bool cancellable = false,
             string cancelButtonText = "Cancel")
         {
-            if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
+            // Use local variable to avoid capture in closingEventHandler closure.
+            var dialogs = _dialogs;
+
+            if (dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
                 DialogHost.Close(dialogIdentifier);
             }
 
-            _dialogs[dialogIdentifier] = typeof(ProgressDialogViewModel);
+            dialogs[dialogIdentifier] = typeof(ProgressDialogViewModel);
 
             var view = _serviceProvider.GetService<ProgressDialogView>();
-            await DialogHost.Show(
+            var viewModel = view.DataContext as ProgressDialogViewModel;
+
+            // Don't await Show to avoid blocking of the return.
+            DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
                 {
-                    var viewModel = view.DataContext as ProgressDialogViewModel;
                     viewModel.Init(dialogIdentifier, isIndeterminate, cancellable);
-                });
+                },
+                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null);
 
-            _dialogs[dialogIdentifier] = null;
+            return viewModel;
         }
 
         public void CloseDialog(string dialogIdentifier)
