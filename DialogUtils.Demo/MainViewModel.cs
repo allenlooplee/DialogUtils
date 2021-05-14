@@ -93,8 +93,6 @@ namespace DialogUtils.Demo
         private void OnCancelled(object sender, EventArgs e)
         {
             Result = "Cancelled";
-
-            ((ProgressDialogViewModel)sender).Cancelled -= OnCancelled;
         }
 
         private ICommand _showCustomCommand;
