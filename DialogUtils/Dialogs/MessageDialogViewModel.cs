@@ -18,18 +18,39 @@ namespace DialogUtils.Dialogs
             set => SetProperty(ref _message, value);
         }
 
-        private bool _isCancelButtonVisible;
-        public bool IsCancelButtonVisible
+        private string _affirmativeButtonText;
+        public string AffirmativeButtonText
         {
-            get => _isCancelButtonVisible;
-            set => SetProperty(ref _isCancelButtonVisible, value);
+            get => _affirmativeButtonText;
+            set => SetProperty(ref _affirmativeButtonText, value);
         }
 
-        public void Init(string message, string header = null, bool isCancelButtonVisible = false)
+        private bool _isNegativeButtonVisible;
+        public bool IsNegativeButtonVisible
+        {
+            get => _isNegativeButtonVisible;
+            set => SetProperty(ref _isNegativeButtonVisible, value);
+        }
+
+        private string _negativeButtonText;
+        public string NegativeButtonText
+        {
+            get => _negativeButtonText;
+            set => SetProperty(ref _negativeButtonText, value);
+        }
+
+        public void Init(
+            string message,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            bool isNegativeButtonVisible = false,
+            string negativeButtonText = "Cancel")
         {
             Header = header;
             Message = message;
-            IsCancelButtonVisible = isCancelButtonVisible;
+            AffirmativeButtonText = affirmativeButtonText;
+            IsNegativeButtonVisible = isNegativeButtonVisible;
+            NegativeButtonText = negativeButtonText;
         }
     }
 }

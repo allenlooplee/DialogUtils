@@ -31,6 +31,13 @@ namespace DialogUtils.Dialogs
             set => SetProperty(ref _cancellable, value);
         }
 
+        private string _cancelButtonText;
+        public string CancelButtonText
+        {
+            get => _cancelButtonText;
+            set => SetProperty(ref _cancelButtonText, value);
+        }
+
         private ICommand _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ?? (_cancelCommand = new RelayCommand(CancelImpl));
         private void CancelImpl()
@@ -47,12 +54,17 @@ namespace DialogUtils.Dialogs
             _dialogHostService = dialogHostService;
         }
 
-        public void Init(string dialogIdentifier, bool isIndeterminate, bool cancellable = false)
+        public void Init(
+            string dialogIdentifier,
+            bool isIndeterminate,
+            bool cancellable = false,
+            string cancelButtonText = "Cancel")
         {
+            _dialogIdentifier = dialogIdentifier;
             IsIndeterminate = isIndeterminate;
             Value = 0;
             Cancellable = cancellable;
-            _dialogIdentifier = dialogIdentifier;
+            CancelButtonText = cancelButtonText;
         }
     }
 }

@@ -113,7 +113,13 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = null;
         }
 
-        public async Task<bool> ShowMessageAsync(string dialogIdentifier, string message, string header = null, bool isCancelButtonVisible = false)
+        public async Task<bool> ShowMessageAsync(
+            string dialogIdentifier,
+            string message,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            bool isNegativeButtonVisible = false,
+            string negativeButtonText = "Cancel")
         {
             if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
@@ -129,7 +135,7 @@ namespace DialogUtils
                 openedEventHandler: (o, e) =>
                 {
                     var viewModel = view.DataContext as MessageDialogViewModel;
-                    viewModel.Init(message, header, isCancelButtonVisible);
+                    viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText);
                 });
 
             _dialogs[dialogIdentifier] = null;
@@ -137,7 +143,13 @@ namespace DialogUtils
             return (bool)result;
         }
 
-        public async Task<string> ShowInputAsync(string dialogIdentifier, string message, string input = null, string header = null)
+        public async Task<string> ShowInputAsync(
+            string dialogIdentifier,
+            string message,
+            string input = null,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            string negativeButtonText = "Cancel")
         {
             if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
@@ -153,7 +165,7 @@ namespace DialogUtils
                 openedEventHandler: (o, e) =>
                 {
                     var viewModel = view.DataContext as InputDialogViewModel;
-                    viewModel.Init(message, input, header);
+                    viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText);
                 });
 
             _dialogs[dialogIdentifier] = null;
@@ -161,7 +173,11 @@ namespace DialogUtils
             return (result as string);
         }
 
-        public async void ShowProgressAsync(string dialogIdentifier, bool isIndeterminate = true, bool cancellable = false)
+        public async void ShowProgressAsync(
+            string dialogIdentifier,
+            bool isIndeterminate = true,
+            bool cancellable = false,
+            string cancelButtonText = "Cancel")
         {
             if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {

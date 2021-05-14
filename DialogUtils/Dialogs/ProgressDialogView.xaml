@@ -35,7 +35,7 @@
             Grid.Row="1"
             Width="80"
             Command="{Binding CancelCommand}"
-            Content="取消"
+            Content="{Binding CancelButtonText}"
             FontSize="14"
             FontWeight="SemiBold"
             IsCancel="True"

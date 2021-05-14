@@ -14,8 +14,26 @@ namespace DialogUtils
             where VM : class;
         void CloseDialog(string dialogIdentifier);
 
-        Task<bool> ShowMessageAsync(string dialogIdentifier, string message, string header = null, bool isCancelButtonVisible = false);
-        Task<string> ShowInputAsync(string dialogIdentifier, string message, string input = null, string header = null);
-        void ShowProgressAsync(string dialogIdentifier, bool isIndeterminate = true, bool cancellable = false);
+        Task<bool> ShowMessageAsync(
+            string dialogIdentifier,
+            string message,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            bool isNegativeButtonVisible = false,
+            string negativeButtonText = "Cancel");
+
+        Task<string> ShowInputAsync(
+            string dialogIdentifier,
+            string message,
+            string input = null,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            string negativeButtonText = "Cancel");
+
+        void ShowProgressAsync(
+            string dialogIdentifier,
+            bool isIndeterminate = true,
+            bool cancellable = false,
+            string cancelButtonText = "Cancel");
     }
 }

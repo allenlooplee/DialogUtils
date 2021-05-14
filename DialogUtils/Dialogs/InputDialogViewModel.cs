@@ -33,11 +33,32 @@ namespace DialogUtils.Dialogs
 
         public bool HasInput => !string.IsNullOrEmpty(Input);
 
-        public void Init(string message, string input = null, string header = null)
+        private string _affirmativeButtonText;
+        public string AffirmativeButtonText
+        {
+            get => _affirmativeButtonText;
+            set => SetProperty(ref _affirmativeButtonText, value);
+        }
+
+        private string _negativeButtonText;
+        public string NegativeButtonText
+        {
+            get => _negativeButtonText;
+            set => SetProperty(ref _negativeButtonText, value);
+        }
+
+        public void Init(
+            string message,
+            string input = null,
+            string header = null,
+            string affirmativeButtonText = "OK",
+            string negativeButtonText = "Cancel")
         {
             Header = header;
             Message = message;
             Input = input;
+            AffirmativeButtonText = affirmativeButtonText;
+            NegativeButtonText = negativeButtonText;
         }
     }
 }

@@ -44,12 +44,12 @@
             <Button
                 Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
-                Content="取消"
+                Content="{Binding NegativeButtonText}"
                 DockPanel.Dock="Right"
                 FontSize="14"
                 FontWeight="SemiBold"
                 Style="{DynamicResource MaterialDesignFlatButton}"
-                Visibility="{Binding IsCancelButtonVisible, Converter={x:Static converters:BooleanToVisibilityConverter.TrueToVisibleConverter}}">
+                Visibility="{Binding IsNegativeButtonVisible, Converter={x:Static converters:BooleanToVisibilityConverter.TrueToVisibleConverter}}">
                 <Button.CommandParameter>
                     <sys:Boolean>false</sys:Boolean>
                 </Button.CommandParameter>
@@ -57,7 +57,7 @@
             <Button
                 Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
-                Content="确定"
+                Content="{Binding AffirmativeButtonText}"
                 DockPanel.Dock="Right"
                 FontSize="14"
                 FontWeight="SemiBold"

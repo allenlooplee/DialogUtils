@@ -37,7 +37,10 @@
             FontWeight="Regular"
             Text="{Binding Message}"
             TextWrapping="Wrap" />
-        <TextBox Margin="24,24,24,0" Grid.Row="2" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox
+            Grid.Row="2"
+            Margin="24,24,24,0"
+            Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
         <DockPanel
             Grid.Row="3"
             Margin="24,28,0,0"
@@ -46,7 +49,7 @@
                 Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
                 CommandParameter="{x:Null}"
-                Content="取消"
+                Content="{Binding NegativeButtonText}"
                 DockPanel.Dock="Right"
                 FontSize="14"
                 FontWeight="SemiBold"
@@ -55,7 +58,7 @@
                 Margin="0,8,8,8"
                 Command="{x:Static md:DialogHost.CloseDialogCommand}"
                 CommandParameter="{Binding Input}"
-                Content="确定"
+                Content="{Binding AffirmativeButtonText}"
                 DockPanel.Dock="Right"
                 FontSize="14"
                 FontWeight="SemiBold"

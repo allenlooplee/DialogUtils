@@ -46,7 +46,7 @@ namespace DialogUtils.Demo
         public RelayCommand ShowMessageCommand => _showMessageCommand ?? (_showMessageCommand = new RelayCommand(ShowMessageImpl, () => !string.IsNullOrEmpty(Message)));
         private async void ShowMessageImpl()
         {
-            var result = await _dialogHostService.ShowMessageAsync(DialogHostIdentifier, Message, Header, isCancelButtonVisible: true);
+            var result = await _dialogHostService.ShowMessageAsync(DialogHostIdentifier, Message, Header, isNegativeButtonVisible: true);
             Result = result ? "Submitted" : "Cancelled";
         }
 
