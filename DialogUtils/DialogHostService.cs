@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using DialogUtils.Helpers;
 
 namespace DialogUtils
 {
@@ -193,7 +194,7 @@ namespace DialogUtils
                 content: view,
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) => viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText),
-                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null);
+                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null).SimpleFireAndForget();
 
             return viewModel;
         }
