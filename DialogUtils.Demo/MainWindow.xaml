@@ -54,7 +54,8 @@
                             <bh:InvokeCommandAction Command="{Binding ClearCommand}" />
                         </bh:EventTrigger>
                     </bh:Interaction.Triggers>
-                    <TabItem Header="Message">
+                    <TabItem Header="INTRO" />
+                    <TabItem Header="MESSAGE">
                         <StackPanel
                             Width="160"
                             HorizontalAlignment="Center"
@@ -77,7 +78,7 @@
                             <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem Header="Input">
+                    <TabItem Header="INPUT">
                         <StackPanel
                             Width="160"
                             HorizontalAlignment="Center"
@@ -100,7 +101,7 @@
                             <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem Header="Progress">
+                    <TabItem Header="PROGRESS">
                         <StackPanel
                             Width="160"
                             HorizontalAlignment="Center"
@@ -117,7 +118,7 @@
                             <TextBlock Text="{Binding Result}" />
                         </StackPanel>
                     </TabItem>
-                    <TabItem Header="Custom">
+                    <TabItem Header="CUSTOM">
                         <StackPanel
                             Width="160"
                             HorizontalAlignment="Center"
