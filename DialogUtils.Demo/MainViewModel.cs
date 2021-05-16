@@ -1,4 +1,5 @@
-﻿using DialogUtils.Dialogs;
+﻿using DialogUtils.Demo.ViewModels;
+using DialogUtils.Dialogs;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -9,7 +10,7 @@ using System.Windows.Threading;
 
 namespace DialogUtils.Demo
 {
-    public class MainViewModel : ObservableObject
+    class MainViewModel : ObservableObject
     {
         private const string DialogHostIdentifier = "MainHost";
         private IDialogHostService _dialogHostService;
@@ -95,11 +96,20 @@ namespace DialogUtils.Demo
             Result = "Cancelled";
         }
 
+        private ContactViewModel _contact;
+        public ContactViewModel Contact
+        {
+            get => _contact;
+            set => SetProperty(ref _contact, value);
+        }
+
         private ICommand _showCustomCommand;
         public ICommand ShowCustomCommand => _showCustomCommand ?? (_showCustomCommand = new RelayCommand(ShowCustomImpl));
         private void ShowCustomImpl()
         {
-
+            _dialogHostService.ShowDialogAsync<EditContactViewModel>(
+                DialogHostIdentifier,
+                vm => vm.Init(Contact));
         }
 
         private ICommand _clearCommand;
@@ -114,6 +124,13 @@ namespace DialogUtils.Demo
         public MainViewModel(IDialogHostService dialogHostService)
         {
             _dialogHostService = dialogHostService;
+
+            Contact = new ContactViewModel
+            {
+                Name = "Loop Lee",
+                Age = 17,
+                Sex = "Male"
+            };
         }
     }
 }

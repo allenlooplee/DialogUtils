@@ -67,27 +67,24 @@ namespace DialogUtils
             }
         }
 
-        public async Task ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
+        public VM ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
             where VM : class
         {
-            if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
+            // Use local variable to avoid capture in closingEventHandler closure.
+            var dialogs = _dialogs;
+
+            if (dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
-                if (vmType == typeof(VM))
-                {
-                    return;
-                }
-                else
-                {
-                    DialogHost.Close(dialogIdentifier);
-                }
+                DialogHost.Close(dialogIdentifier);
             }
 
-            _dialogs[dialogIdentifier] = typeof(VM);
+            dialogs[dialogIdentifier] = typeof(VM);
 
             var view = GetView(typeof(VM).FullName);
             var viewModel = view.DataContext as VM;
 
-            await DialogHost.Show(
+            // Don't await Show to avoid blocking of the return, but use SimpleFireAndForget for throwing exception if any.
+            DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
@@ -109,9 +106,10 @@ namespace DialogUtils
                             dialogViewModel.Init();
                         }
                     }
-                });
+                },
+                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null).SimpleFireAndForget();
 
-            _dialogs[dialogIdentifier] = null;
+            return viewModel;
         }
 
         public async Task<bool> ShowMessageAsync(
@@ -189,7 +187,7 @@ namespace DialogUtils
             var view = _serviceProvider.GetService<ProgressDialogView>();
             var viewModel = view.DataContext as ProgressDialogViewModel;
 
-            // Don't await Show to avoid blocking of the return.
+            // Don't await Show to avoid blocking of the return, but use SimpleFireAndForget for throwing exception if any.
             DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,

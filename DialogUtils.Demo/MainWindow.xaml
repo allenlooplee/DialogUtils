@@ -123,6 +123,24 @@
                             Width="160"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Name"
+                                IsReadOnly="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding Contact.Name}" />
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Age"
+                                IsReadOnly="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding Contact.Age}" />
+                            <TextBox
+                                Margin="0,0,0,16"
+                                md:HintAssist.Hint="Sex"
+                                IsReadOnly="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding Contact.Sex}" />
                             <Button
                                 Margin="0,0,0,16"
                                 Command="{Binding ShowCustomCommand}"
