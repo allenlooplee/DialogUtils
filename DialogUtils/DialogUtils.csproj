@@ -5,6 +5,14 @@
     <UseWPF>true</UseWPF>
     <Authors>Allen Lee</Authors>
     <Company />
+    <Description>A small library that provides a simple yet complete way to use DialogHost from Material Design in XAML in a WPF MVVM app.</Description>
+    <Copyright>Copyright (c) 2021 Allen Lee</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/allenlooplee/DialogUtils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/allenlooplee/DialogUtils</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.0-rc</Version>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
