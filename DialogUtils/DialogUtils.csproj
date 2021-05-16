@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Allen Lee</Authors>
+    <Company />
   </PropertyGroup>
 
   <ItemGroup>

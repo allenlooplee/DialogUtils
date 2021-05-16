@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Allen Lee</Authors>
   </PropertyGroup>
 
   <ItemGroup>
