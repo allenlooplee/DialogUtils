@@ -4,9 +4,83 @@ Dialogs are a little bit tricky in the world of MVVM because it can be easy to b
 
 There's no simple way to deal with dialogs in MVVM. [ReactiveUI](https://www.reactiveui.net/)'s solution is to abstract the dialogs as [interactions](https://www.reactiveui.net/docs/handbook/interactions/). [Material Design In XAML Toolkit](http://materialdesigninxaml.net/)'s solution is [DialogHost](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Dialogs). I'm using the latter in [Aclass for Windows](https://www.aketang.cn/) but extend it a little bit to make it easy to work with [Microsoft MVVM Toolkit](https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction) and [Microsoft Dependency Injection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)/[.NET Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
 
-## Setup
+## Getting Started
 
-## Usage
+1. Create a WPF app. You can create a netcoreapp3.1 WPF project and re-target it to net48 by editing the .csproj file.
+2. Search and install DialogUtils in NuGet Package Manager. This will also install its dependencies such as Material Design In XAML Toolkit.
+3. Get your WPF app ready for Material Design according to [Super Quick Start](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Super-Quick-Start).
+4. In MainWindow.xaml, replace the child element of `<Window/>` with the below code. Note that ShowMessageCommand will be defined in the next step.
+
+```XML
+<md:DialogHost Identifier="MainHost">
+    <Grid>
+        <Button
+            Command="{Binding ShowMessageCommand}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="Show Message" />
+    </Grid>
+</md:DialogHost>
+```
+
+5. Create the below MainViewModel class and use Visual Studio to automatically add the corresponding namespaces.
+
+```C#
+public class MainViewModel : ObservableObject
+{
+    private IDialogHostService _dialogHostService;
+
+    private ICommand _showMessageCommand;
+    public ICommand ShowMessageCommand => _showMessageCommand ?? (_showMessageCommand = new RelayCommand(ShowMessageImpl));
+    private async void ShowMessageImpl()
+    {
+        await _dialogHostService.ShowMessageAsync(
+            dialogIdentifier: "MainHost",
+            message: "Hello, World",
+            isNegativeButtonVisible: true);
+    }
+
+    public MainViewModel(IDialogHostService dialogHostService)
+    {
+        _dialogHostService = dialogHostService;
+    }
+}
+```
+
+6. In MainWindow.xaml.cs, get an instance of MainViewModel from the container and assign it to DataContext in the constructor.
+
+```C#
+public MainWindow()
+{
+    InitializeComponent();
+
+    DataContext = Ioc.Default.GetService<MainViewModel>();
+}
+```
+
+7. Register DialogHostService and MainViewModel in App.xaml.cs.
+
+```C#
+public partial class App : Application
+{
+    public App()
+    {
+        Ioc.Default.ConfigureServices(ConfigureServices());
+    }
+
+    private static IServiceProvider ConfigureServices()
+    {
+        var services = new ServiceCollection();
+
+        services.AddDialogHostService();
+        services.AddTransient<MainViewModel>();
+
+        return services.BuildServiceProvider();
+    }
+}
+```
+
+8. Finally, hit F5 to run your app and click the Show Message button. You'll see the "Hello, World" message.
 
 ## Thanks
 
