@@ -11,7 +11,7 @@ namespace DialogUtils
             where VM : class
             where V : UserControl;
 
-        VM ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
+        Task<VM> ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
             where VM : class;
         void CloseDialog(string dialogIdentifier);
 

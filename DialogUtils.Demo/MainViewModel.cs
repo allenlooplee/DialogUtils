@@ -105,9 +105,9 @@ namespace DialogUtils.Demo
 
         private ICommand _showCustomCommand;
         public ICommand ShowCustomCommand => _showCustomCommand ?? (_showCustomCommand = new RelayCommand(ShowCustomImpl));
-        private void ShowCustomImpl()
+        private async void ShowCustomImpl()
         {
-            _dialogHostService.ShowDialogAsync<EditContactViewModel>(
+            _ = await _dialogHostService.ShowDialogAsync<EditContactViewModel>(
                 DialogHostIdentifier,
                 vm => vm.Init(Contact));
         }

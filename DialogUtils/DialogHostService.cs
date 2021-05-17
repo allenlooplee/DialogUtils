@@ -67,24 +67,20 @@ namespace DialogUtils
             }
         }
 
-        public VM ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
+        public async Task<VM> ShowDialogAsync<VM>(string dialogIdentifier, Action<VM> init = null)
             where VM : class
         {
-            // Use local variable to avoid capture in closingEventHandler closure.
-            var dialogs = _dialogs;
-
-            if (dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
+            if (_dialogs.TryGetValue(dialogIdentifier, out var vmType) && vmType != null)
             {
                 DialogHost.Close(dialogIdentifier);
             }
 
-            dialogs[dialogIdentifier] = typeof(VM);
+            _dialogs[dialogIdentifier] = typeof(VM);
 
             var view = GetView(typeof(VM).FullName);
             var viewModel = view.DataContext as VM;
 
-            // Don't await Show to avoid blocking of the return, but use SimpleFireAndForget for throwing exception if any.
-            DialogHost.Show(
+            await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
                 openedEventHandler: (o, e) =>
@@ -106,8 +102,9 @@ namespace DialogUtils
                             dialogViewModel.Init();
                         }
                     }
-                },
-                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null).SimpleFireAndForget();
+                });
+
+            _dialogs[dialogIdentifier] = null;
 
             return viewModel;
         }
