@@ -1,0 +1,53 @@
+﻿<mdx:MaterialWindow
+    x:Class="DialogUtilsProjectTemplate.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mdx="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+    Title="Your app title"
+    Width="800"
+    Height="450"
+    TextElement.FontFamily="Microsoft YaHei"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <md:DialogHost DialogTheme="Light" Identifier="MainHost">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <mdx:AppBar Title="Your page title" ShowNavigationDrawerButton="True">
+                <StackPanel
+                    Margin="0,0,4,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="8,0"
+                        md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}"
+                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                        ToolTip="Search">
+                        <md:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="Search" />
+                    </Button>
+                    <md:PopupBox Margin="8,0">
+                        <StackPanel>
+                            <Button Content="Menu Item 1"/>
+                            <Button Content="Menu Item 1"/>
+                        </StackPanel>
+                    </md:PopupBox>
+                </StackPanel>
+            </mdx:AppBar>
+            <Button
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding ShowMessageCommand}"
+                Content="Show message" />
+        </Grid>
+    </md:DialogHost>
+</mdx:MaterialWindow>

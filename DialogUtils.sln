@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DialogUtils", "DialogUtils\DialogUtils.csproj", "{DF521941-0197-46F3-86A9-C901B56D6354}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DialogUtils.Demo", "DialogUtils.Demo\DialogUtils.Demo.csproj", "{F6F2722C-15DB-423A-A44F-613694C61C73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DialogUtils.Demo", "DialogUtils.Demo\DialogUtils.Demo.csproj", "{F6F2722C-15DB-423A-A44F-613694C61C73}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DialogUtilsProjectTemplate", "DialogUtilsProjectTemplate\DialogUtilsProjectTemplate.csproj", "{2D4B9573-A2FA-424F-88ED-003C6F7BBF61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F6F2722C-15DB-423A-A44F-613694C61C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6F2722C-15DB-423A-A44F-613694C61C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6F2722C-15DB-423A-A44F-613694C61C73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4B9573-A2FA-424F-88ED-003C6F7BBF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4B9573-A2FA-424F-88ED-003C6F7BBF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4B9573-A2FA-424F-88ED-003C6F7BBF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4B9573-A2FA-424F-88ED-003C6F7BBF61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
