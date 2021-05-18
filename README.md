@@ -13,6 +13,8 @@ If you're going to start a new project, it is highly recommended to use the [VSI
 3. Create a project with the "Material Design WPF App with DialogUtils" project template.
 4. Hit F5 to run the app.
 
+Note that the project template further leverages Material Design Extensions for [MaterialWindow and AppBar](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow).
+
 ## Getting Started
 
 If you're going to use DialogUtils in an existing project that already has Material Design In XAML Toolkit [installed and configured](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started), below is the guide.
@@ -89,5 +91,5 @@ public class MainViewModel : ObservableObject
 * [Material Design In XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
 * [Microsoft MVVM Toolkit](https://github.com/windows-toolkit/WindowsCommunityToolkit/tree/main/Microsoft.Toolkit.Mvvm)
 * [Microsoft Dependency Injection](https://github.com/dotnet/runtime/tree/main/src/libraries/Microsoft.Extensions.DependencyInjection)
-* [Material Design Extensions](https://github.com/spiegelp/MaterialDesignExtensions) (used in Demo project)
-* [XamlBehaviors for WPF](https://github.com/microsoft/XamlBehaviorsWpf) (used in Demo project)
+* [Material Design Extensions](https://github.com/spiegelp/MaterialDesignExtensions)
+* [XamlBehaviors for WPF](https://github.com/microsoft/XamlBehaviorsWpf)
