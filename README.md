@@ -4,6 +4,15 @@ Dialogs are a little bit tricky in the world of MVVM because it can be easy to b
 
 There's no simple way to deal with dialogs in MVVM. [ReactiveUI](https://www.reactiveui.net/)'s solution is to abstract the dialogs as [interactions](https://www.reactiveui.net/docs/handbook/interactions/). [Material Design In XAML Toolkit](http://materialdesigninxaml.net/)'s solution is [DialogHost](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Dialogs). I'm using the latter in [Aclass for Windows](https://www.aketang.cn/) but extend it a little bit to make it easy to work with [Microsoft MVVM Toolkit](https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction) and [Microsoft Dependency Injection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)/[.NET Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
 
+## Super Quick Start
+
+If you're going to start a new project, it is highly recommended to use the [VSIX template installer](https://github.com/allenlooplee/DialogUtils/tree/main/DialogUtilsProjectTemplateInstaller) to install [a clean project template](https://github.com/allenlooplee/DialogUtils/tree/main/DialogUtilsProjectTemplate) for your Visual Studio.
+
+1. Download the VSIX template installer from the [latest release](https://github.com/allenlooplee/DialogUtils/releases), and run it on your machine.
+2. Open Visual Studio and search "Material Design WPF App with DialogUtils" in project templates.
+3. Create a project with the "Material Design WPF App with DialogUtils" project template.
+4. Hit F5 to run the app.
+
 ## Getting Started
 
 1. Create a WPF app. You can create a netcoreapp3.1 WPF project and re-target it to net48 by editing the .csproj file.
