@@ -15,59 +15,20 @@ If you're going to start a new project, it is highly recommended to use the [VSI
 
 ## Getting Started
 
-1. Create a WPF app. You can create a netcoreapp3.1 WPF project and re-target it to net48 by editing the .csproj file.
-2. Search and install DialogUtils in NuGet Package Manager. This will also install its dependencies such as Material Design In XAML Toolkit.
-3. Get your WPF app ready for Material Design according to [Super Quick Start](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Super-Quick-Start).
-4. In MainWindow.xaml, replace the child element of `<Window/>` with the below code. Note that ShowMessageCommand will be defined in the next step.
+If you're going to use DialogUtils in an existing project that already has Material Design In XAML Toolkit [installed and configured](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started), below is the guide.
+
+1. Search and install DialogUtils in NuGet Package Manager.
+2. In MainWindow.xaml, insert a `<DialogHost/>` between `<Window/>` and it's original child.
 
 ```XML
-<md:DialogHost Identifier="MainHost">
-    <Grid>
-        <Button
-            Command="{Binding ShowMessageCommand}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Content="Show Message" />
-    </Grid>
-</md:DialogHost>
+<Window>
+    <md:DialogHost Identifier="MainHost">
+        <!-- original child -->
+    </md:DialogHost>
+</Window>
 ```
 
-5. Create the below MainViewModel class and use Visual Studio to automatically add the corresponding namespaces.
-
-```C#
-public class MainViewModel : ObservableObject
-{
-    private IDialogHostService _dialogHostService;
-
-    private ICommand _showMessageCommand;
-    public ICommand ShowMessageCommand => _showMessageCommand ?? (_showMessageCommand = new RelayCommand(ShowMessageImpl));
-    private async void ShowMessageImpl()
-    {
-        await _dialogHostService.ShowMessageAsync(
-            dialogIdentifier: "MainHost",
-            message: "Hello, World",
-            isNegativeButtonVisible: true);
-    }
-
-    public MainViewModel(IDialogHostService dialogHostService)
-    {
-        _dialogHostService = dialogHostService;
-    }
-}
-```
-
-6. In MainWindow.xaml.cs, get an instance of MainViewModel from the container and assign it to DataContext in the constructor.
-
-```C#
-public MainWindow()
-{
-    InitializeComponent();
-
-    DataContext = Ioc.Default.GetService<MainViewModel>();
-}
-```
-
-7. Register DialogHostService and MainViewModel in App.xaml.cs.
+3. Register DialogHostService using the AddDialogHostService extension method and MainViewModel in App.xaml.cs. If you're using .NET Generic Host, you can use the UseDialogHostService extension method instead on the IHostBuilder object.
 
 ```C#
 public partial class App : Application
@@ -89,7 +50,39 @@ public partial class App : Application
 }
 ```
 
-8. Finally, hit F5 to run your app and click the Show Message button. You'll see the "Hello, World" message.
+4. Setup MainViewModel as MainWindow's DataContext. If you're using .NET Generic Host, you might already have both MainViewModel and MainWindow registered in the container. In this case you can inject MainViewModel in MainWindow's constructor.
+
+```C#
+public MainWindow()
+{
+    InitializeComponent();
+
+    DataContext = Ioc.Default.GetService<MainViewModel>();
+}
+```
+
+5. Inject IDialogHostService in MainViewModel's constructor, save it as a private member for showing dialogs within any command implementation.
+
+```C#
+public class MainViewModel : ObservableObject
+{
+    private IDialogHostService _dialogHostService;
+
+    private ICommand _showMessageCommand;
+    public ICommand ShowMessageCommand => _showMessageCommand ?? (_showMessageCommand = new RelayCommand(ShowMessageImpl));
+    private async void ShowMessageImpl()
+    {
+        await _dialogHostService.ShowMessageAsync(
+            dialogIdentifier: "MainHost",
+            message: "Hello, World");
+    }
+
+    public MainViewModel(IDialogHostService dialogHostService)
+    {
+        _dialogHostService = dialogHostService;
+    }
+}
+```
 
 ## Thanks
 
