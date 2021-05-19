@@ -56,97 +56,109 @@
                     </bh:Interaction.Triggers>
                     <TabItem Header="INTRO" />
                     <TabItem Header="MESSAGE">
-                        <StackPanel
-                            Width="160"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Header (optional)"
-                                Style="{StaticResource MaterialDesignTextBox}"
-                                Text="{Binding Header}" />
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Message (required)"
-                                Style="{StaticResource MaterialDesignTextBox}"
-                                Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
-                            <Button
-                                Margin="0,0,0,16"
-                                Command="{Binding ShowMessageCommand}"
-                                Content="Show Message"
-                                Style="{StaticResource MaterialDesignRaisedButton}" />
-                            <TextBlock Text="{Binding Result}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="16">
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Header (optional)"
+                                    Style="{StaticResource MaterialDesignTextBox}"
+                                    Text="{Binding Header}" />
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Message (required)"
+                                    Style="{StaticResource MaterialDesignTextBox}"
+                                    Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button
+                                    Margin="0,0,0,16"
+                                    Command="{Binding ShowMessageCommand}"
+                                    Content="Show Message"
+                                    Style="{StaticResource MaterialDesignRaisedButton}" />
+                                <TextBlock Text="{Binding Result}" />
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
                     <TabItem Header="INPUT">
-                        <StackPanel
-                            Width="160"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Header (optional)"
-                                Style="{StaticResource MaterialDesignTextBox}"
-                                Text="{Binding Header}" />
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Message (required)"
-                                Style="{StaticResource MaterialDesignTextBox}"
-                                Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
-                            <Button
-                                Margin="0,0,0,16"
-                                Command="{Binding ShowInputCommand}"
-                                Content="Show Input"
-                                Style="{StaticResource MaterialDesignRaisedButton}" />
-                            <TextBlock Text="{Binding Result}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="16">
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Header (optional)"
+                                    Style="{StaticResource MaterialDesignTextBox}"
+                                    Text="{Binding Header}" />
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Message (required)"
+                                    Style="{StaticResource MaterialDesignTextBox}"
+                                    Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button
+                                    Margin="0,0,0,16"
+                                    Command="{Binding ShowInputCommand}"
+                                    Content="Show Input"
+                                    Style="{StaticResource MaterialDesignRaisedButton}" />
+                                <TextBlock Text="{Binding Result}" />
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
                     <TabItem Header="PROGRESS">
-                        <StackPanel
-                            Width="160"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
-                                <ToggleButton IsChecked="{Binding Cancellable}" Style="{StaticResource MaterialDesignSwitchToggleButton}" />
-                                <TextBlock Margin="8,0,0,0" Text="Show cancel button" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="16">
+                                <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding Cancellable}" Style="{StaticResource MaterialDesignSwitchToggleButton}" />
+                                    <TextBlock Margin="8,0,0,0" Text="Show cancel button" />
+                                </StackPanel>
+                                <Button
+                                    Margin="0,0,0,16"
+                                    Command="{Binding ShowProgressCommand}"
+                                    Content="Show Progress"
+                                    Style="{StaticResource MaterialDesignRaisedButton}" />
+                                <TextBlock Text="{Binding Result}" />
                             </StackPanel>
-                            <Button
-                                Margin="0,0,0,16"
-                                Command="{Binding ShowProgressCommand}"
-                                Content="Show Progress"
-                                Style="{StaticResource MaterialDesignRaisedButton}" />
-                            <TextBlock Text="{Binding Result}" />
-                        </StackPanel>
+                        </Grid>
                     </TabItem>
                     <TabItem Header="CUSTOM">
-                        <StackPanel
-                            Width="160"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Name"
-                                IsReadOnly="True"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding Contact.Name}" />
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Age"
-                                IsReadOnly="True"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding Contact.Age}" />
-                            <TextBox
-                                Margin="0,0,0,16"
-                                md:HintAssist.Hint="Sex"
-                                IsReadOnly="True"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding Contact.Sex}" />
-                            <Button
-                                Margin="0,0,0,16"
-                                Command="{Binding ShowCustomCommand}"
-                                Content="Show Custom"
-                                Style="{StaticResource MaterialDesignRaisedButton}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="16">
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Name"
+                                    IsReadOnly="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Contact.Name}" />
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Age"
+                                    IsReadOnly="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Contact.Age}" />
+                                <TextBox
+                                    Margin="0,0,0,16"
+                                    md:HintAssist.Hint="Sex"
+                                    IsReadOnly="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Contact.Sex}" />
+                                <Button
+                                    Margin="0,0,0,16"
+                                    Command="{Binding ShowCustomCommand}"
+                                    Content="Show Custom"
+                                    Style="{StaticResource MaterialDesignRaisedButton}" />
+                            </StackPanel>
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </Grid>
