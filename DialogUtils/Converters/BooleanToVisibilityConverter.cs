@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace DialogUtils.Converters
 {
-    class BooleanToVisibilityConverter : IValueConverter
+    public class BooleanToVisibilityConverter : IValueConverter
     {
         private readonly Visibility _trueValue;
         private readonly Visibility _falseValue;
