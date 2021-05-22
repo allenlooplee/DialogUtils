@@ -5,9 +5,9 @@
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
     <Authors>Allen Lee</Authors>
-    <Version>1.0.0-rc.1</Version>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
     <ApplicationIcon>Assets\logo-128.ico</ApplicationIcon>
   </PropertyGroup>
 
