@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DialogUtils" Version="1.0.0-rc.1" />
+    <PackageReference Include="DialogUtils" Version="1.0.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
   </ItemGroup>
 
