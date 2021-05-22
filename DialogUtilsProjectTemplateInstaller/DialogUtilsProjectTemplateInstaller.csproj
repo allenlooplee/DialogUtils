@@ -49,6 +49,10 @@
     <Compile Include="DialogUtilsProjectTemplateInstallerPackage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\logo-128.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="ProjectTemplates\Material Design WPF App with DialogUtils.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

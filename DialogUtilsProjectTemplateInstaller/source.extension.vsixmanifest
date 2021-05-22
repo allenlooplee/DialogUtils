@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DialogUtilsProjectTemplateInstaller.aebf05d4-45b9-467e-8c2c-5c4f5ffa6bd2" Version="1.0" Language="en-US" Publisher="Allen Lee" />
+        <Identity Id="DialogUtilsProjectTemplateInstaller.aebf05d4-45b9-467e-8c2c-5c4f5ffa6bd2" Version="1.0.0" Language="en-US" Publisher="Allen Lee" />
         <DisplayName>Material Design WPF App with DialogUtils</DisplayName>
         <Description xml:space="preserve">A project template for creating a WPF application with Material Design In XAML Toolkit and DialogUtils.</Description>
         <MoreInfo>https://github.com/allenlooplee/DialogUtils</MoreInfo>
         <GettingStartedGuide>https://github.com/allenlooplee/DialogUtils/blob/main/README.md</GettingStartedGuide>
+        <Icon>Assets\logo-128.png</Icon>
         <Tags>Material Design WPF MVVM DialogHost</Tags>
-        <Preview>true</Preview>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />
