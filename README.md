@@ -8,12 +8,11 @@ There's no simple way to deal with dialogs in MVVM. [ReactiveUI](https://www.rea
 
 ## Super Quick Start
 
-If you're going to start a new project, it is highly recommended to use the [VSIX template installer](https://github.com/allenlooplee/DialogUtils/tree/main/DialogUtilsProjectTemplateInstaller) to install [a clean project template](https://github.com/allenlooplee/DialogUtils/tree/main/DialogUtilsProjectTemplate) for your Visual Studio.
+If you're going to start a new project, it is highly recommended to use the [VSIX template installer](https://marketplace.visualstudio.com/items?itemName=allenlooplee.dialogutils) to install [a clean project template](https://github.com/allenlooplee/DialogUtils/tree/main/DialogUtilsProjectTemplate) for your Visual Studio.
 
-1. Download the VSIX template installer from the [latest release](https://github.com/allenlooplee/DialogUtils/releases), and run it on your machine.
-2. Open Visual Studio and search "Material Design WPF App with DialogUtils" in project templates.
-3. Create a project with the "Material Design WPF App with DialogUtils" project template.
-4. Hit F5 to run the app.
+1. Find and install "dialogutils" in Visual Studio's [Manage Extensions dialog box](https://docs.microsoft.com/en-us/visualstudio/ide/finding-and-using-visual-studio-extensions?view=vs-2019).
+2. Search "dialogutils" and [create a new project](https://docs.microsoft.com/en-us/visualstudio/ide/create-new-project?view=vs-2019) with the "Material Design WPF App with DialogUtils" project template in Visual Studio.
+3. Hit F5 to run the app.
 
 Note that the project template further leverages Material Design Extensions for [MaterialWindow and AppBar](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow).
 
