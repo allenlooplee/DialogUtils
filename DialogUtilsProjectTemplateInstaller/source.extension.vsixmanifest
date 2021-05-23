@@ -5,8 +5,10 @@
         <DisplayName>Material Design WPF App with DialogUtils</DisplayName>
         <Description xml:space="preserve">A project template for creating a WPF application with Material Design In XAML Toolkit and DialogUtils.</Description>
         <MoreInfo>https://github.com/allenlooplee/DialogUtils</MoreInfo>
+        <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/allenlooplee/DialogUtils/blob/main/README.md</GettingStartedGuide>
         <Icon>Assets\logo-128.png</Icon>
+        <PreviewImage>Assets\logo-256.png</PreviewImage>
         <Tags>Material Design WPF MVVM DialogHost</Tags>
     </Metadata>
     <Installation>
