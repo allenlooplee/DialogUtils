@@ -87,6 +87,24 @@ public class MainViewModel : ObservableObject
 }
 ```
 
+## Usage
+
+1. How to show a message?
+
+The simplest way to do so is call the `ShowMessageAsync` on an instance of `IDialogHostService` usually injected via constructor as below. The `dialogIdentifier` and `message` parameters are required; the others such as `header` are optional.
+
+```C#
+await _dialogHostService.ShowMessageAsync(DialogHostIdentifier, Message);
+```
+
+2. How to show a message with OK and Cancel buttons and return whether the user clicks the OK button?
+
+Passing true to the `isNegativeButtonVisible` parameter of `ShowMessageAsync` will show both OK and Cancel buttons. The return value will be `true` if the user clicks OK button; otherwise `false`. The text of both buttons can also be customized by using the `affirmativeButtonText` and `negativeButtonText` parameters of `ShowMessageAsync` respectively.
+
+```C#
+var result = await _dialogHostService.ShowMessageAsync(DialogHostIdentifier, Message, isNegativeButtonVisible: true);
+```
+
 ## Thanks
 
 * [Material Design In XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
