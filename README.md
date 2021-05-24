@@ -105,6 +105,40 @@ Passing true to the `isNegativeButtonVisible` parameter of `ShowMessageAsync` wi
 var result = await _dialogHostService.ShowMessageAsync(DialogHostIdentifier, Message, isNegativeButtonVisible: true);
 ```
 
+3. How to get input from user?
+
+Call `ShowInputAsync` as below which will show a dialog with a `TextBox` inside. If the user types some text within the `TextBox` and clicks OK button, the method will return that as a `string`; otherwise, `null`. If you want also to show an existing value in the `TextBox`, you can use the third parameter which is currently `null` in the below code.
+
+```C#
+var result = await _dialogHostService.ShowInputAsync(DialogHostIdentifier, Message, null, Header);
+```
+
+4. How to show a progress dialog?
+
+Call `ShowProgressAsync` as below which will show a small dialog with an indeterminate progress ring inside. You'll need to close the dialog manually by calling `CloseDialog` on an instance of `IDialogHostService` with the same `DialogHostIdentifier`.
+
+```C#
+_dialogHostService.ShowProgressAsync(DialogHostIdentifier);
+```
+If you want also a cancel button on the dialog, you can pass `true` to the `cancellable` parameter. In this case, clicking that cancel button will close the current progress dialog.
+
+`ShowProgressAsync` returns the view model used by the current progress dialog. If you want to change the value of the progress ring, you can pass `false` to the `isIndeterminate` parameter and increase the value of the `Value` property as below. Note that you can also use the `Close` method of the view model to close the current progress dialog.
+
+```C#
+var vm = _dialogHostService.ShowProgressAsync(
+    DialogHostIdentifier,
+    isIndeterminate: false);
+
+for (double d = 0; d < 100; d += .5)
+{
+    vm.Value = d;
+    await Task.Delay(10);
+}
+
+vm.Close();
+```
+
+
 ## Thanks
 
 * [Material Design In XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
