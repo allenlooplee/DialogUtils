@@ -138,6 +138,43 @@ for (double d = 0; d < 100; d += .5)
 vm.Close();
 ```
 
+5. How to show a custom dialog?
+
+Let's say you have a view named `EditContactView` which inherits from `UserControl` and a view model named `EditContactViewModel` which is injected via `EditContactViewM`'s constructor as below.
+
+```C#
+public EditContactView(EditContactViewModel viewModel)
+{
+    InitializeComponent();
+    DataContext = viewModel;
+}
+```
+
+Register the view and the view model in `App`'s `ConfigureServices` method as transient as below.
+
+```C#
+services.AddTransient<EditContactViewModel>();
+services.AddTransient<EditContactView>();
+```
+
+And tell DialogHostService that they relate to each other via `Configure` method as below. Note that if you create a project with the VSIX template, the `ConfigureDialogHostService` method is already created for you.
+
+```C#
+private static IDialogHostService ConfigureDialogHostService(IServiceProvider services)
+{
+    var dialogHostService = new DialogHostService(services);
+    dialogHostService.Configure<EditContactViewModel, EditContactView>();
+    return dialogHostService;
+}
+```
+
+Now you can show it via `ShowDialogAsync` method as below. As you can see, you tell it which view model to use, it'll find the corresponding view to show. You can also initialize the view model by passing a lambda.
+
+```C#
+await _dialogHostService.ShowDialogAsync<EditContactViewModel>(
+    DialogHostIdentifier,
+    vm => vm.Init(Contact));
+```
 
 ## Thanks
 
