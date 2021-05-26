@@ -78,6 +78,7 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = typeof(VM);
 
             var view = GetView(typeof(VM).FullName);
+            // Todo: Get an instance of view model in case DataContext is null.
             var viewModel = view.DataContext as VM;
 
             await DialogHost.Show(
@@ -102,6 +103,9 @@ namespace DialogUtils
                             dialogViewModel.Init();
                         }
                     }
+                    
+                    // Todo: Send a message to notify dialog opened
+                    // Todo: Send a message to notify dialog closed in another event handler
                 });
 
             _dialogs[dialogIdentifier] = null;
