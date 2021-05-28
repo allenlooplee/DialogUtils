@@ -78,8 +78,14 @@ namespace DialogUtils
             _dialogs[dialogIdentifier] = typeof(VM);
 
             var view = GetView(typeof(VM).FullName);
-            // Todo: Get an instance of view model in case DataContext is null.
             var viewModel = view.DataContext as VM;
+            // Normally view model is injected into view via constructor.
+            // Get an instance of view model in case DataContext is null.
+            if (viewModel == null)
+            {
+                viewModel = _serviceProvider.GetService<VM>();
+                view.DataContext = viewModel;
+            }
 
             await DialogHost.Show(
                 content: view,

@@ -21,11 +21,9 @@ namespace DialogUtils.Demo.Views
     /// </summary>
     public partial class EditContactView : UserControl
     {
-        public EditContactView(EditContactViewModel viewModel)
+        public EditContactView()
         {
             InitializeComponent();
-
-            DataContext = viewModel;
         }
     }
 }
