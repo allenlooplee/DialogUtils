@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using DialogUtils.Helpers;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using DialogUtils.Messages;
 
 namespace DialogUtils
 {
@@ -109,10 +111,10 @@ namespace DialogUtils
                             dialogViewModel.Init();
                         }
                     }
-                    
-                    // Todo: Send a message to notify dialog opened
-                    // Todo: Send a message to notify dialog closed in another event handler
-                });
+
+                    NotifyDialogHostOpened(dialogIdentifier);
+                },
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -140,7 +142,12 @@ namespace DialogUtils
             var result = await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) => viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText));
+                openedEventHandler: (o, e) =>
+                {
+                    viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText);
+                    NotifyDialogHostOpened(dialogIdentifier);
+                },
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -168,7 +175,12 @@ namespace DialogUtils
             var result = await DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) => viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText));
+                openedEventHandler: (o, e) =>
+                {
+                    viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText);
+                    NotifyDialogHostOpened(dialogIdentifier);
+                },
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -198,8 +210,17 @@ namespace DialogUtils
             DialogHost.Show(
                 content: view,
                 dialogIdentifier: dialogIdentifier,
-                openedEventHandler: (o, e) => viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText),
-                closingEventHandler: (o, e) => dialogs[dialogIdentifier] = null).SimpleFireAndForget();
+                openedEventHandler: (o, e) =>
+                {
+                    viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText);
+                    NotifyDialogHostOpened(dialogIdentifier);
+                },
+                closingEventHandler: (o, e) =>
+                {
+                    dialogs[dialogIdentifier] = null;
+                    NotifyDialogHostClosing(dialogIdentifier);
+                })
+                .SimpleFireAndForget();
 
             return viewModel;
         }
@@ -210,6 +231,16 @@ namespace DialogUtils
             {
                 DialogHost.Close(dialogIdentifier);
             }
+        }
+
+        private void NotifyDialogHostOpened(string dialogIdentifier)
+        {
+            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Opened));
+        }
+
+        private void NotifyDialogHostClosing(string dialogIdentifier)
+        {
+            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Closing));
         }
     }
 }

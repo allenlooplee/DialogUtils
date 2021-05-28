@@ -1,16 +1,16 @@
 ﻿using DialogUtils.Demo.ViewModels;
-using DialogUtils.Dialogs;
+using DialogUtils.Messages;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace DialogUtils.Demo
 {
-    class MainViewModel : ObservableObject
+    class MainViewModel : ObservableRecipient
     {
         private const string DialogHostIdentifier = "MainHost";
         private IDialogHostService _dialogHostService;
@@ -131,6 +131,21 @@ namespace DialogUtils.Demo
                 Age = 17,
                 Sex = "Male"
             };
+
+            Messenger.Register<MainViewModel, DialogHostMessage>(this, (r, m) =>
+            {
+                if (m.DialogIdentifier == DialogHostIdentifier)
+                {
+                    if (m.DialogHostEvent == DialogHostEvent.Opened)
+                    {
+                        Debug.WriteLine($"{m.DialogIdentifier} is opened.");
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"{m.DialogIdentifier} is closing.");
+                    }
+                }
+            });
         }
     }
 }
