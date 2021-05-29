@@ -140,17 +140,7 @@ vm.Close();
 
 5. How to show a custom dialog?
 
-Let's say you have a view named `EditContactView` which inherits from `UserControl` and a view model named `EditContactViewModel` which is injected via `EditContactViewM`'s constructor as below.
-
-```C#
-public EditContactView(EditContactViewModel viewModel)
-{
-    InitializeComponent();
-    DataContext = viewModel;
-}
-```
-
-Register the view and the view model in `App`'s `ConfigureServices` method as transient as below.
+Let's say you have a view named `EditContactView` and a view model named `EditContactViewModel` registered as transient in `App`'s `ConfigureServices` method as below. Note that views are required to inherit from `UserControl`.
 
 ```C#
 services.AddTransient<EditContactViewModel>();
@@ -174,6 +164,16 @@ Now you can show it via `ShowDialogAsync` method as below. As you can see, you t
 await _dialogHostService.ShowDialogAsync<EditContactViewModel>(
     DialogHostIdentifier,
     vm => vm.Init(Contact));
+```
+
+Usually we inject a view model into a view via constructor as below. In this case DialogHostService will use the view model you injected. Otherwise, it will get one from the container and associate it to the view for you.
+
+```C#
+public EditContactView(EditContactViewModel viewModel)
+{
+    InitializeComponent();
+    DataContext = viewModel;
+}
 ```
 
 ## Thanks
