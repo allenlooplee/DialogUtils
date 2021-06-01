@@ -112,9 +112,9 @@ namespace DialogUtils
                         }
                     }
 
-                    NotifyDialogHostOpened(dialogIdentifier);
+                    NotifyDialogHostOpened(dialogIdentifier, typeof(VM));
                 },
-                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier, typeof(VM)));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -145,9 +145,9 @@ namespace DialogUtils
                 openedEventHandler: (o, e) =>
                 {
                     viewModel.Init(message, header, affirmativeButtonText, isNegativeButtonVisible, negativeButtonText);
-                    NotifyDialogHostOpened(dialogIdentifier);
+                    NotifyDialogHostOpened(dialogIdentifier, typeof(MessageDialogView));
                 },
-                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier, typeof(MessageDialogView)));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -178,9 +178,9 @@ namespace DialogUtils
                 openedEventHandler: (o, e) =>
                 {
                     viewModel.Init(message, input, header, affirmativeButtonText, negativeButtonText);
-                    NotifyDialogHostOpened(dialogIdentifier);
+                    NotifyDialogHostOpened(dialogIdentifier, typeof(InputDialogView));
                 },
-                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier));
+                closingEventHandler: (o, e) => NotifyDialogHostClosing(dialogIdentifier, typeof(InputDialogView)));
 
             _dialogs[dialogIdentifier] = null;
 
@@ -213,12 +213,12 @@ namespace DialogUtils
                 openedEventHandler: (o, e) =>
                 {
                     viewModel.Init(dialogIdentifier, isIndeterminate, cancellable, cancelButtonText);
-                    NotifyDialogHostOpened(dialogIdentifier);
+                    NotifyDialogHostOpened(dialogIdentifier, typeof(ProgressDialogViewModel));
                 },
                 closingEventHandler: (o, e) =>
                 {
                     dialogs[dialogIdentifier] = null;
-                    NotifyDialogHostClosing(dialogIdentifier);
+                    NotifyDialogHostClosing(dialogIdentifier, typeof(ProgressDialogViewModel));
                 })
                 .SimpleFireAndForget();
 
@@ -233,14 +233,14 @@ namespace DialogUtils
             }
         }
 
-        private void NotifyDialogHostOpened(string dialogIdentifier)
+        private void NotifyDialogHostOpened(string dialogIdentifier, Type viewModelType)
         {
-            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Opened));
+            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Opened, viewModelType));
         }
 
-        private void NotifyDialogHostClosing(string dialogIdentifier)
+        private void NotifyDialogHostClosing(string dialogIdentifier, Type viewModelType)
         {
-            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Closing));
+            WeakReferenceMessenger.Default.Send(new DialogHostMessage(dialogIdentifier, DialogHostEvent.Closing, viewModelType));
         }
     }
 }

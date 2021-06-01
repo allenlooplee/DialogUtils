@@ -138,11 +138,11 @@ namespace DialogUtils.Demo
                 {
                     if (m.DialogHostEvent == DialogHostEvent.Opened)
                     {
-                        Debug.WriteLine($"{m.DialogIdentifier} is opened.");
+                        Debug.WriteLine($"{m.ViewModelType} via {m.DialogIdentifier} is opened.");
                     }
                     else
                     {
-                        Debug.WriteLine($"{m.DialogIdentifier} is closing.");
+                        Debug.WriteLine($"{m.ViewModelType} via {m.DialogIdentifier} is closing.");
                     }
                 }
             });
