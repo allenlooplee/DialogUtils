@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/allenlooplee/DialogUtils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/allenlooplee/DialogUtils</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.2.0</Version>
+    <Version>1.2.0-beta.1</Version>
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <FileVersion>1.2.0.0</FileVersion>
