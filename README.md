@@ -176,9 +176,9 @@ public EditContactView(EditContactViewModel viewModel)
 }
 ```
 
-6. How to know if a dialog host is opened or being closed?
+6. How to know if a dialog is opened or being closed?
 
-You can register `DialogHostMessage` with `WeakReferenceMessenger`'s `Register` method, and then check the `DialogIdentifier` property to see which dialog host is being used. To know whether the dialog host is opened or being closed, you can check the `DialogHostEvent` property to see if it's `DialogHostEvent.Opened` or `DialogHostEvent.Closing` respectively.
+You can register `DialogHostMessage` with `WeakReferenceMessenger`'s `Register` method, and then check the `DialogIdentifier` property or the `ViewModelType` property. These are actually two dimensions because one dialog host can be used for multiple dialogs and one dialog can be hosted in multiple dialog hosts. To know whether the dialog host or a dialog view model is opened or being closed, you can check the `DialogHostEvent` property to see if it's `DialogHostEvent.Opened` or `DialogHostEvent.Closing` respectively.
 
 ## Thanks
 
