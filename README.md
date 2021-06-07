@@ -20,7 +20,7 @@ Note that the project template further leverages Material Design Extensions for 
 
 If you're going to use DialogUtils in an existing project that already has Material Design In XAML Toolkit [installed and configured](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started), below is the guide.
 
-1. Search and install DialogUtils in NuGet Package Manager.
+1. Search and install [DialogUtils](https://www.nuget.org/packages/DialogUtils/) in NuGet Package Manager.
 2. In MainWindow.xaml, insert a `<DialogHost/>` between `<Window/>` and it's original child.
 
 ```XML
