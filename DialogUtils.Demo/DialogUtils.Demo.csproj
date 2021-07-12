@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Authors>Allen Lee</Authors>
-    <Version>1.2.0</Version>
-    <AssemblyVersion>1.2.0.1</AssemblyVersion>
-    <FileVersion>1.2.0.1</FileVersion>
+    <Version>1.3.0</Version>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
     <ApplicationIcon>Assets\logo-128.ico</ApplicationIcon>
   </PropertyGroup>
 
